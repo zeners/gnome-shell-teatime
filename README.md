@@ -13,7 +13,7 @@ The name of the package may vary from distribution to distributon. The first two
 
 They should be located somewhere in `/usr/share/aclocal`.
 
-**Installaton**
+**Installation**
 
 If everything is in place, run
 
