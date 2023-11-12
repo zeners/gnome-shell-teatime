@@ -10,7 +10,10 @@ import GObject from 'gi://GObject';
 import Shell from 'gi://Shell';
 import St from 'gi://St';
 
-import {Extension, gettext as _} from 'resource:///org/gnome/shell/extensions/extension.js';
+import {
+	Extension,
+	gettext as _
+} from 'resource:///org/gnome/shell/extensions/extension.js';
 
 import * as Layout from 'resource:///org/gnome/shell/ui/layout.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
@@ -239,7 +242,7 @@ let TeaTime = GObject.registerClass(
 				delete this._idleTimeout;
 			}
 			this._idleTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250,
-			                                     this._doCountdown.bind(this));
+				this._doCountdown.bind(this));
 
 			if (this._settings.get_boolean(this.config_keys.remember_running_timer)) {
 				// remember timer
@@ -341,10 +344,7 @@ export default class TeaTimeExtension extends Extension {
 	}
 
 	disable() {
-		if (this._TeaTime._idleTimeout) {
-			GLib.source_remove(this._TeaTime._idleTimeout);
-			delete this._TeaTime._idleTimeout;
-		}
+		this._stopCountdown();
 		this._TeaTime.destroy();
 		delete this._TeaTime;
 	}

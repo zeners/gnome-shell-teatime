@@ -320,7 +320,7 @@ var TeaTimePrefsWidget = GObject.registerClass(
 	});
 
 export default class TeaTimePreferences extends ExtensionPreferences {
-    getPreferencesWidget() {
-        return new TeaTimePrefsWidget(this);
-    }
+	getPreferencesWidget() {
+		return new TeaTimePrefsWidget(this);
+	}
 }

@@ -90,6 +90,7 @@ export var TwoColorIcon = GObject.registerClass(
 			} catch (e) {
 				// ignore
 			}
+			cr.$dispose();
 		}
 	});
 
