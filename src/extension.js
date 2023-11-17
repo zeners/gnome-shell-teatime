@@ -344,7 +344,7 @@ export default class TeaTimeExtension extends Extension {
 	}
 
 	disable() {
-		this._stopCountdown();
+		this._TeaTime._stopCountdown();
 		this._TeaTime.destroy();
 		delete this._TeaTime;
 	}
