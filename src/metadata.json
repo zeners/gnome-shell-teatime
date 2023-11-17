@@ -9,9 +9,10 @@
     "43",
     "44"
   ],
-  "uuid": "TeaTime@zener.sbg.at",
-  "name": "TeaTime",
+  "uuid": "TeaTimer@zener.sbg.at",
+  "name": "TeaTimer",
   "settings-schema": "org.gnome.shell.extensions.teatime",
   "gettext-domain": "TeaTime",
-  "description": "A tea steeping timer\nGit repository: https://github.com/zeners/gnome-shell-teatime"
+  "description": "A tea steeping timer\nGit repository: https://github.com/zeners/gnome-shell-teatime",
+  "url": "https://github.com/zeners/gnome-shell-teatime"
 }

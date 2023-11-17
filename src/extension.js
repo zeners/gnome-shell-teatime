@@ -343,6 +343,6 @@ function enable() {
 }
 
 function disable() {
-	if (_TeaTime._idleTimeout != null) Mainloop.source_remove(_TeaTime._idleTimeout);
+	_TeaTime._stopCountdown()
 	_TeaTime.destroy();
 }
