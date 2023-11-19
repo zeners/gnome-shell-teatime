@@ -1,4 +1,4 @@
 src/extension.js
 src/prefs.js
 src/utils.js
-src/schemas/org.gnome.shell.extensions.teatime.gschema.xml.in
+src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml.in
