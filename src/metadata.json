@@ -4,8 +4,8 @@
   ],
   "uuid": "TeaTimer@zener.sbg.at",
   "name": "TeaTimer",
-  "settings-schema": "org.gnome.shell.extensions.teatime",
-  "gettext-domain": "TeaTime",
-  "description": "A tea steeping timer\nGit repository: https://github.com/zeners/gnome-shell-teatime",
-  "url": "https://github.com/zeners/gnome-shell-teatime"
+  "settings-schema": "org.gnome.shell.extensions.teatimer",
+  "gettext-domain": "TeaTimer",
+  "description": "A tea steeping timer\nTemporary Fork for https://extensions.gnome.org/extension/604/teatime",
+  "url": "https://github.com/zeners/gnome-shell-teatime/tree/teatimer"
 }
