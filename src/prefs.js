@@ -289,7 +289,7 @@ var TeaTimePrefsWidget = GObject.registerClass(
 			if (have_value && setting_is_different) {
 				this._inhibitUpdate = true;
 
-				Utils.playSound(alarm_sound);
+				Utils.playSound(alarm_sound, _);
 				this._settings.set_string(this.config_keys.alarm_sound, alarm_sound);
 				this._inhibitUpdate = false;
 				this.alarmSoundFileFile = alarm_sound;
@@ -321,18 +321,18 @@ var TeaTimePrefsWidget = GObject.registerClass(
 	});
 
 export default class TeaTimePreferences extends ExtensionPreferences {
-    fillPreferencesWindow(window) {
-        window._settings = this.getSettings();
+	fillPreferencesWindow(window) {
+		window._settings = this.getSettings();
 
-        const page = new Adw.PreferencesPage();
+		const page = new Adw.PreferencesPage();
 
-        const group = new Adw.PreferencesGroup({
-            // title: _('Group Title'),
-        });
-        group.add(new TeaTimePrefsWidget(this));
+		const group = new Adw.PreferencesGroup({
+			// title: _('Group Title'),
+		});
+		group.add(new TeaTimePrefsWidget(this));
 
-        page.add(group);
+		page.add(group);
 
-        window.add(page);
-    }
+		window.add(page);
+	}
 }

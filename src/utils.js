@@ -4,6 +4,7 @@
 */
 
 import Gst from 'gi://Gst';
+import Gio from 'gi://Gio';
 
 const ENABLE_LOGGING = false;
 
@@ -47,31 +48,13 @@ export function formatTime(sec_num) {
 	return ((hours == "00") ? "" : hours + ':') + minutes + ':' + seconds;
 }
 
-let _player = null;
-let _playBus = null;
-
-export function playSound(uri) {
+export function playSound(uri, _) {
 
 	debug("Playing " + uri);
+	let player = global.display.get_sound_player();
+	let file = Gio.File.new_for_uri(uri);
+	player.play_from_file(file, _("Your tea is ready!"), null);
 
-	if (_player == null) {
-		Gst.init(null);
-		_player = Gst.ElementFactory.make("playbin", "player");
-		_playBus = _player.get_bus();
-		_playBus.add_signal_watch();
-		_playBus.connect("message",
-			function (playBus, message) {
-				if (message != null) {
-					// IMPORTANT: to reuse the player, set state to READY
-					let t = message.type;
-					if (t == Gst.MessageType.EOS || t == Gst.MessageType.ERROR) {
-						_player.set_state(Gst.State.READY);
-					}
-				} // message handler
-			}.bind(this));
-	} // if undefined
-	_player.set_property('uri', uri);
-	_player.set_state(Gst.State.PLAYING);
 }
 
 export function setCairoColorFromClutter(cr, c) {

@@ -297,7 +297,7 @@ let TeaTime = GObject.registerClass(
 		_playSound() {
 			let bPlayAlarmSound = this._settings.get_boolean(this.config_keys.use_alarm_sound);
 			if (bPlayAlarmSound) {
-				Utils.playSound(this._settings.get_string(this.config_keys.alarm_sound));
+				Utils.playSound(this._settings.get_string(this.config_keys.alarm_sound), _);
 			}
 		}
 
@@ -306,9 +306,9 @@ let TeaTime = GObject.registerClass(
 			return 0;
 		}
 
-        _getGlobalDisplayScaleFactor() {
-	        return St.ThemeContext.get_for_stage(global.stage).scale_factor;
-        }
+		_getGlobalDisplayScaleFactor() {
+			return St.ThemeContext.get_for_stage(global.stage).scale_factor;
+		}
 
 		_onStyleChanged(actor) {
 			let themeNode = actor.get_theme_node();
