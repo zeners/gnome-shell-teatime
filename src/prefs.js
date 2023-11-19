@@ -321,18 +321,18 @@ var TeaTimePrefsWidget = GObject.registerClass(
 	});
 
 export default class TeaTimePreferences extends ExtensionPreferences {
-    fillPreferencesWindow(window) {
-        window._settings = this.getSettings();
+	fillPreferencesWindow(window) {
+		window._settings = this.getSettings();
 
-        const page = new Adw.PreferencesPage();
+		const page = new Adw.PreferencesPage();
 
-        const group = new Adw.PreferencesGroup({
-            // title: _('Group Title'),
-        });
-        group.add(new TeaTimePrefsWidget(this));
+		const group = new Adw.PreferencesGroup({
+			// title: _('Group Title'),
+		});
+		group.add(new TeaTimePrefsWidget(this));
 
-        page.add(group);
+		page.add(group);
 
-        window.add(page);
-    }
+		window.add(page);
+	}
 }

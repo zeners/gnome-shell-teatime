@@ -306,9 +306,9 @@ let TeaTime = GObject.registerClass(
 			return 0;
 		}
 
-        _getGlobalDisplayScaleFactor() {
-	        return St.ThemeContext.get_for_stage(global.stage).scale_factor;
-        }
+		_getGlobalDisplayScaleFactor() {
+			return St.ThemeContext.get_for_stage(global.stage).scale_factor;
+		}
 
 		_onStyleChanged(actor) {
 			let themeNode = actor.get_theme_node();
