@@ -19,10 +19,18 @@ extensiondir = $(extensionbase)/$(uuid)
 nobase_dist_extension_DATA = src/metadata.json $(extension_files) $(additional_files) $(opt_files)
 
 .PHONY: zip local-install local-helper
-    
+
+# alternate: gnome-extensions pack \
+#   --podir=../po \
+#   --schema=schemas/org.gnome.shell.extensions.teatime.gschema.xml \
+#   --extra-source=icon.js \
+#   --extra-source=utils.js \
+#   --force \
+#   src
 zip:
 	$(MAKE) local-helper DESTDIR=$(abs_builddir)/_build
 	(cd $(abs_builddir)/_build/$(uuid)/ && \
+	 mv ../share/locale . && \
 	 zip -qr $(abs_builddir)/$(uuid).zip . \
 	)
 	-rm -rf $(abs_builddir)/_build
