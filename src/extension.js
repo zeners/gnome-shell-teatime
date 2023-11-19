@@ -4,10 +4,8 @@
 */
 
 import Clutter from 'gi://Clutter';
-import Gio from 'gi://Gio';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
-import Shell from 'gi://Shell';
 import St from 'gi://St';
 
 import {
@@ -15,10 +13,8 @@ import {
 	gettext as _
 } from 'resource:///org/gnome/shell/extensions/extension.js';
 
-import * as Layout from 'resource:///org/gnome/shell/ui/layout.js';
 import * as Main from 'resource:///org/gnome/shell/ui/main.js';
 import * as MessageTray from 'resource:///org/gnome/shell/ui/messageTray.js';
-import * as Panel from 'resource:///org/gnome/shell/ui/panel.js';
 import * as PanelMenu from 'resource:///org/gnome/shell/ui/panelMenu.js';
 import * as PopupMenu from 'resource:///org/gnome/shell/ui/popupMenu.js';
 
@@ -310,6 +306,10 @@ let TeaTime = GObject.registerClass(
 			return 0;
 		}
 
+        _getGlobalDisplayScaleFactor() {
+	        return St.ThemeContext.get_for_stage(global.stage).scale_factor;
+        }
+
 		_onStyleChanged(actor) {
 			let themeNode = actor.get_theme_node();
 			let color = themeNode.get_foreground_color()
@@ -331,7 +331,7 @@ let TeaTime = GObject.registerClass(
 			this._graphicalTimer.setColor(this._primaryColor, this._secondaryColor);
 
 			// forward (possible) scaling style change to child
-			let scaling = Utils.getGlobalDisplayScaleFactor();
+			let scaling = this._getGlobalDisplayScaleFactor();
 			this._logo.setScaling(scaling);
 			this._graphicalTimer.setScaling(scaling);
 		}

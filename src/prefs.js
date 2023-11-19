@@ -14,6 +14,7 @@ import {
 } from 'resource:///org/gnome/Shell/Extensions/js/extensions/prefs.js';
 
 import * as Utils from './utils.js';
+import Adw from 'gi://Adw';
 
 const Columns = {
 	TEA_NAME: 0,
@@ -320,7 +321,18 @@ var TeaTimePrefsWidget = GObject.registerClass(
 	});
 
 export default class TeaTimePreferences extends ExtensionPreferences {
-	getPreferencesWidget() {
-		return new TeaTimePrefsWidget(this);
-	}
+    fillPreferencesWindow(window) {
+        window._settings = this.getSettings();
+
+        const page = new Adw.PreferencesPage();
+
+        const group = new Adw.PreferencesGroup({
+            // title: _('Group Title'),
+        });
+        group.add(new TeaTimePrefsWidget(this));
+
+        page.add(group);
+
+        window.add(page);
+    }
 }

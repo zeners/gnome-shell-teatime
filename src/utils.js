@@ -3,11 +3,13 @@
    Thomas Liebetraut <thomas@tommie-lie.de>
 */
 
+import Gst from 'gi://Gst';
+
 const ENABLE_LOGGING = false;
 
 export function debug(text) {
 	if (ENABLE_LOGGING)
-		log("**TeaTime >: " + text);
+		console.debug("**TeaTime >: " + text);
 }
 
 export function GetConfigKeys() {
@@ -45,15 +47,14 @@ export function formatTime(sec_num) {
 	return ((hours == "00") ? "" : hours + ':') + minutes + ':' + seconds;
 }
 
-let _player;
-let _playBus;
+let _player = null;
+let _playBus = null;
 
 export function playSound(uri) {
-	const Gst = imports.gi.Gst;
 
 	debug("Playing " + uri);
 
-	if (typeof _player == 'undefined') {
+	if (_player == null) {
 		Gst.init(null);
 		_player = Gst.ElementFactory.make("playbin", "player");
 		_playBus = _player.get_bus();
@@ -76,11 +77,6 @@ export function playSound(uri) {
 export function setCairoColorFromClutter(cr, c) {
 	let s = 1.0 / 255;
 	cr.setSourceRGBA(s * c.red, s * c.green, s * c.blue, s * c.alpha);
-}
-
-export function getGlobalDisplayScaleFactor() {
-	const St = imports.gi.St;
-	return St.ThemeContext.get_for_stage(global.stage).scale_factor;
 }
 
 export function isType(value, typename) {
