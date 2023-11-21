@@ -3,7 +3,6 @@
    Thomas Liebetraut <thomas@tommie-lie.de>
 */
 
-import Gst from 'gi://Gst';
 import Gio from 'gi://Gio';
 
 const ENABLE_LOGGING = false;
@@ -48,13 +47,13 @@ export function formatTime(sec_num) {
 	return ((hours == "00") ? "" : hours + ':') + minutes + ':' + seconds;
 }
 
-export function playSound(uri, _) {
+export function playSound(uri, _, player) {
 
 	debug("Playing " + uri);
-	let player = global.display.get_sound_player();
-	let file = Gio.File.new_for_uri(uri);
-	player.play_from_file(file, _("Your tea is ready!"), null);
-
+	if (player != null) {
+		let file = Gio.File.new_for_uri(uri);
+		player.play_from_file(file, _("Your tea is ready!"), null);
+	}
 }
 
 export function setCairoColorFromClutter(cr, c) {

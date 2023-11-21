@@ -297,7 +297,7 @@ let TeaTime = GObject.registerClass(
 		_playSound() {
 			let bPlayAlarmSound = this._settings.get_boolean(this.config_keys.use_alarm_sound);
 			if (bPlayAlarmSound) {
-				Utils.playSound(this._settings.get_string(this.config_keys.alarm_sound), _);
+				Utils.playSound(this._settings.get_string(this.config_keys.alarm_sound), _, global.display.get_sound_player());
 			}
 		}
 

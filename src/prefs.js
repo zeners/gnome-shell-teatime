@@ -93,7 +93,8 @@ var TeaTimePrefsWidget = GObject.registerClass(
 			this.alarmSoundFileFilter.add_mime_type("audio/*");
 
 			this.alarmSoundFileButton = new Gtk.Button({
-				label: _("Select alarm sound file")
+				label: _("Select alarm sound file"),
+				sensitive: false // FileDialog should be changed from Gtk.FileChooserNative (deprecated) to Gtk.FileDialog
 			});
 			this.alarmSoundFileButton.connect("clicked", this._selectAlarmSoundFile.bind(this));
 
@@ -289,7 +290,7 @@ var TeaTimePrefsWidget = GObject.registerClass(
 			if (have_value && setting_is_different) {
 				this._inhibitUpdate = true;
 
-				Utils.playSound(alarm_sound, _);
+				Utils.playSound(alarm_sound, _, null);
 				this._settings.set_string(this.config_keys.alarm_sound, alarm_sound);
 				this._inhibitUpdate = false;
 				this.alarmSoundFileFile = alarm_sound;
