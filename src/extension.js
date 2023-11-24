@@ -340,7 +340,7 @@ let TeaTime = GObject.registerClass(
 export default class TeaTimeExtension extends Extension {
 	enable() {
 		this._TeaTime = new TeaTime(this);
-		Main.panel.addToStatusArea('teatime', this._TeaTime);
+		Main.panel.addToStatusArea('teatimer', this._TeaTime);
 	}
 
 	disable() {
