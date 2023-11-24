@@ -16,6 +16,11 @@ import {
 import * as Utils from './utils.js';
 import Adw from 'gi://Adw';
 
+/*
+    GTK documentation: https://docs.gtk.org/
+    GJS documentation: https://gjs-docs.gnome.org/
+*/
+
 const Columns = {
 	TEA_NAME: 0,
 	STEEP_TIME: 1,
@@ -24,7 +29,7 @@ const Columns = {
 
 var TeaTimePrefsWidget = GObject.registerClass(
 	class TeaTimePrefsWidget extends Gtk.Grid {
-		_init(extension) {
+		_init(extension, parentWindow) {
 			super._init({
 				orientation: Gtk.Orientation.VERTICAL,
 				column_homogeneous: false,
@@ -37,6 +42,7 @@ var TeaTimePrefsWidget = GObject.registerClass(
 			});
 
 			this.config_keys = Utils.GetConfigKeys();
+			this.parentWindow = parentWindow;
 
 			this._tealist = new Gtk.ListStore();
 			this._tealist.set_column_types([
@@ -168,19 +174,36 @@ var TeaTimePrefsWidget = GObject.registerClass(
 			this.removeButton = Gtk.Button.new_from_icon_name("list-remove-symbolic");
 			this.removeButton.connect("clicked", this._removeSelectedTea.bind(this));
 			this.attach(this.removeButton, 4 /*col*/ , curRow /*row*/ , 2 /*col span*/ , 1 /*row span*/ );
+			curRow +=1;
+
+            this.alarmSoundError = new Gtk.Label({
+                                   				label: '',
+                                   				hexpand: true
+                                   				});
+			this.attach(this.alarmSoundError, 0, curRow, 4, 1);
 		}
 
 		_selectAlarmSoundFile() {
-			// recreate -> preselecting file doesn't work on second call if not ...
-			this.alarmSoundFile = new Gtk.FileChooserNative({
-				title: _("Select alarm sound file"),
-				action: Gtk.FileChooserAction.OPEN,
-
-			});
-			this.alarmSoundFile.set_filter(this.alarmSoundFileFilter);
-			this.alarmSoundFile.connect("response", this._saveSoundFile.bind(this));
-			this.alarmSoundFile.set_file(Gio.File.new_for_uri(this.alarmSoundFileFile));
-			this.alarmSoundFile.show();
+		    // https://gjs-docs.gnome.org/gtk40~4.0/gtk.filedialog
+			// FileDialog should be changed from Gtk.FileChooserNative (deprecated) to Gtk.FileDialog
+			try {
+                this.alarmSoundError.label = '';
+                let filters = new Gio.ListStore(GObject.type_from_name('GtkFileFilter'));
+                filters.append(this.alarmSoundFileFilter);
+                let file = Gio.File.new_for_uri(this.alarmSoundFileFile);
+                this.alarmSoundFile = new Gtk.FileDialog({
+                        title: _("Select alarm sound file"),
+                        filters: filters,
+                        'default-filter': null,
+                        'initial-file': file,
+                        'initial-name': file.get_basename(), // don't work :(
+                        modal: true
+                });
+                this.alarmSoundFile.open(this.parentWindow, null, this._saveSoundFile.bind(this));
+                this.alarmSoundError.label = 'Dialog open with ' + this.alarmSoundFileFile;
+            } catch (e) {
+                this.alarmSoundError.label = e.message
+            }
 		}
 
 		_refresh() {
@@ -276,11 +299,21 @@ var TeaTimePrefsWidget = GObject.registerClass(
 			this._inhibitUpdate = false;
 		}
 
-		_saveSoundFile(sw, response_id, data) {
+		_saveSoundFile(src, response_id, data) {
+		    this.alarmSoundError.label = '';
+		    let file = null
+            try {
+                file = this.alarmSoundFile.open_finish(response_id);
+            } catch (e) {
+			    this.alarmSoundError.label = e.message;
+			    return;
+            }
+
 			// don't update the backend if someone else is messing with the model or not accept new file
-			if (this._inhibitUpdate || response_id != Gtk.ResponseType.ACCEPT)
+			if (this._inhibitUpdate || file == null) {
 				return;
-			let alarm_sound = this.alarmSoundFile.get_file().get_uri();
+			}
+			let alarm_sound = file.get_uri();
 			Utils.debug(this._settings.get_string(this.config_keys.alarm_sound) + "-->" + alarm_sound);
 
 			let have_value = Utils.isType(alarm_sound, "string");
@@ -289,7 +322,7 @@ var TeaTimePrefsWidget = GObject.registerClass(
 			if (have_value && setting_is_different) {
 				this._inhibitUpdate = true;
 
-				Utils.playSound(alarm_sound);
+				Utils.playSound(alarm_sound, _, null);
 				this._settings.set_string(this.config_keys.alarm_sound, alarm_sound);
 				this._inhibitUpdate = false;
 				this.alarmSoundFileFile = alarm_sound;
@@ -329,7 +362,7 @@ export default class TeaTimePreferences extends ExtensionPreferences {
 		const group = new Adw.PreferencesGroup({
 			// title: _('Group Title'),
 		});
-		group.add(new TeaTimePrefsWidget(this));
+		group.add(new TeaTimePrefsWidget(this, window));
 
 		page.add(group);
 
