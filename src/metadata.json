@@ -6,6 +6,6 @@
   "name": "TeaTimer",
   "settings-schema": "org.gnome.shell.extensions.teatimer",
   "gettext-domain": "TeaTimer",
-  "description": "A tea steeping timer\nTemporary Fork for https://extensions.gnome.org/extension/604/teatime",
+  "description": "A tea steeping timer\nFollow-up Fork of https://extensions.gnome.org/extension/604/teatime",
   "url": "https://github.com/zeners/gnome-shell-teatime/tree/teatimer"
 }
