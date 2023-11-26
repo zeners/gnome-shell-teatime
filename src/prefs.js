@@ -19,6 +19,7 @@ import Adw from 'gi://Adw';
 /*
     GTK documentation: https://docs.gtk.org/
     GJS documentation: https://gjs-docs.gnome.org/
+    https://gjs.guide/extensions/upgrading/gnome-shell-45.html
 */
 
 const Columns = {

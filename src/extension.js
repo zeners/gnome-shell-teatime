@@ -200,16 +200,7 @@ let TeaTime = GObject.registerClass(
 		}
 
 		_showNotification(subject, text) {
-			let source = new MessageTray.Source(_("TeaTime applet"), 'utilities-teatime');
-			Main.messageTray.add(source);
-
-			let notification = new MessageTray.Notification(source, subject, text);
-			notification.setTransient(true);
-			if (typeof source.showNotification === 'function') {
-				source.showNotification(notification);
-			} else {
-				source.notify(notification);
-			}
+			Main.notify(subject, text, this._extension.dir.get_child('utilities-teatime.svg').get_path());
 		}
 
 		_initCountdown(startTime, time) {
