@@ -174,36 +174,36 @@ var TeaTimePrefsWidget = GObject.registerClass(
 			this.removeButton = Gtk.Button.new_from_icon_name("list-remove-symbolic");
 			this.removeButton.connect("clicked", this._removeSelectedTea.bind(this));
 			this.attach(this.removeButton, 4 /*col*/ , curRow /*row*/ , 2 /*col span*/ , 1 /*row span*/ );
-			curRow +=1;
+			curRow += 1;
 
-            this.alarmSoundError = new Gtk.Label({
-                                   				label: '',
-                                   				hexpand: true
-                                   				});
+			this.alarmSoundError = new Gtk.Label({
+				label: '',
+				hexpand: true
+			});
 			this.attach(this.alarmSoundError, 0, curRow, 4, 1);
 		}
 
 		_selectAlarmSoundFile() {
-		    // https://gjs-docs.gnome.org/gtk40~4.0/gtk.filedialog
+			// https://gjs-docs.gnome.org/gtk40~4.0/gtk.filedialog
 			// FileDialog should be changed from Gtk.FileChooserNative (deprecated) to Gtk.FileDialog
 			try {
-                this.alarmSoundError.label = '';
-                let filters = new Gio.ListStore(GObject.type_from_name('GtkFileFilter'));
-                filters.append(this.alarmSoundFileFilter);
-                let file = Gio.File.new_for_uri(this.alarmSoundFileFile);
-                this.alarmSoundFile = new Gtk.FileDialog({
-                        title: _("Select alarm sound file"),
-                        filters: filters,
-                        'default-filter': null,
-                        'initial-file': file,
-                        'initial-name': file.get_basename(), // don't work :(
-                        modal: true
-                });
-                this.alarmSoundFile.open(this.parentWindow, null, this._saveSoundFile.bind(this));
-                this.alarmSoundError.label = 'Dialog open with ' + this.alarmSoundFileFile;
-            } catch (e) {
-                this.alarmSoundError.label = e.message
-            }
+				this.alarmSoundError.label = '';
+				let filters = new Gio.ListStore(GObject.type_from_name('GtkFileFilter'));
+				filters.append(this.alarmSoundFileFilter);
+				let file = Gio.File.new_for_uri(this.alarmSoundFileFile);
+				this.alarmSoundFile = new Gtk.FileDialog({
+					title: _("Select alarm sound file"),
+					filters: filters,
+					'default-filter': null,
+					'initial-file': file,
+					'initial-name': file.get_basename(), // don't work :(
+					modal: true
+				});
+				this.alarmSoundFile.open(this.parentWindow, null, this._saveSoundFile.bind(this));
+				this.alarmSoundError.label = 'Dialog open with ' + this.alarmSoundFileFile;
+			} catch (e) {
+				this.alarmSoundError.label = e.message
+			}
 		}
 
 		_refresh() {
@@ -300,14 +300,14 @@ var TeaTimePrefsWidget = GObject.registerClass(
 		}
 
 		_saveSoundFile(src, response_id, data) {
-		    this.alarmSoundError.label = '';
-		    let file = null
-            try {
-                file = this.alarmSoundFile.open_finish(response_id);
-            } catch (e) {
-			    this.alarmSoundError.label = e.message;
-			    return;
-            }
+			this.alarmSoundError.label = '';
+			let file = null
+			try {
+				file = this.alarmSoundFile.open_finish(response_id);
+			} catch (e) {
+				this.alarmSoundError.label = e.message;
+				return;
+			}
 
 			// don't update the backend if someone else is messing with the model or not accept new file
 			if (this._inhibitUpdate || file == null) {
