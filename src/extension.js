@@ -175,21 +175,22 @@ let TeaTime = GObject.registerClass(
 
 				let customTime = text.get_text();
 				let seconds = 0;
-				let match = customTime.match(/^(?:(\d+)(?::(\d{0,2}))?|:(\d+))$/)
+				let match = customTime.match(/^(?:(\d+):(?=\d+:\d+))?(\d+)(?::(\d{0,2}))?$/) // [h:]m[:s]
+				if (!match) {
+				    match = customTime.match(/^:(\d+)$/) // only seconds
+				}
+				if (!match) { // 1h1m1s format
+				    match = customTime.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/)
+				}
 				if (match) {
 					let factor = 1;
-					if (match[3] === undefined) { // minutes and seconds?
-						for (var i = match.length - 2; i > 0; i--) {
-							let s = match[i] === undefined ? "" : match[i].replace(/^0/, ''); // fix for elder GNOME <= 3.10 which don't like leading zeros
-							if (s.match(/^\d+$/)) { // only if something left
-								seconds += factor * parseInt(s);
-							}
-							factor *= 60;
-						}
-					} else { // only seconds?
-						let s = match[3].replace(/^0/, '');
-						seconds = parseInt(s);
-					}
+                    for (var i = match.length - 1; i > 0; i--) {
+                        let s = match[i] === undefined ? "" : match[i].replace(/^0+/, ''); // fix for elder GNOME <= 3.10 which don't like leading zeros
+                        if (s.match(/^\d+$/)) { // only if something left
+                            seconds += factor * parseInt(s);
+                        }
+                        factor *= 60;
+                    }
 					if (seconds > 0) {
 						this._initCountdown(new Date(), seconds);
 						this.menu.close();
