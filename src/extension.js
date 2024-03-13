@@ -94,7 +94,6 @@ let TeaTime = GObject.registerClass(
 			/*******************/
 			let bottom = new PopupMenu.PopupMenuSection();
 			this._customEntry = new St.Entry({
-				style_class: 'teatime-custom-entry',
 				track_hover: true,
 				hint_text: _("min:sec")
 			});
