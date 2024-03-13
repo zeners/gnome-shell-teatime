@@ -35,9 +35,9 @@ let PopupTeaMenuItem = GObject.registerClass(
 				});
 			}
 
-			this.add(this.tealabel);
+			this.add_child(this.tealabel);
 			if (nBrewtime != 0) {
-				this.add(this.timelabel);
+				this.add_child(this.timelabel);
 			}
 
 			this._delegate = this;
@@ -64,7 +64,7 @@ let TeaTime = GObject.registerClass(
 			});
 			this._graphicalTimer = new Icon.TwoColorIcon(20, Icon.Pie);
 
-			this.add_actor(this._logo);
+			this.add_child(this._logo);
 			this.add_style_class_name('panel-status-button');
 			this.connect('style-changed', this._onStyleChanged.bind(this));
 
@@ -100,7 +100,7 @@ let TeaTime = GObject.registerClass(
 			});
 			this._customEntry.get_clutter_text().set_max_length(10);
 			this._customEntry.get_clutter_text().connect("key-press-event", this._createCustomTimer.bind(this));
-			bottom.box.add(this._customEntry);
+			bottom.box.add_child(this._customEntry);
 			bottom.actor.set_style("padding: 0px 18px;")
 
 			/*******************/
@@ -157,10 +157,10 @@ let TeaTime = GObject.registerClass(
 			if (bWantGraphicalCountdown != this._bGraphicalCountdown) {
 				if (this._idleTimeout != null) {
 					// we have a running countdown, replace the display
-					this.remove_actor(this._bGraphicalCountdown ?
+					this.remove_child(this._bGraphicalCountdown ?
 						this._graphicalTimer : this._textualTimer);
 					this._bGraphicalCountdown = bWantGraphicalCountdown;
-					this.add_actor(this._bGraphicalCountdown ?
+					this.add_child(this._bGraphicalCountdown ?
 						this._graphicalTimer : this._textualTimer);
 
 					this._updateTimerDisplay(this._getRemainingSec());
@@ -218,11 +218,11 @@ let TeaTime = GObject.registerClass(
 			this.graphicalCounter = 0;
 			this._stopTime.setTime(this._startTime.getTime() + time * 1000); // in msec
 
-			this.remove_actor(this._logo); // show timer instead of default icon
+			this.remove_child(this._logo); // show timer instead of default icon
 
 			this._updateTimerDisplay(time);
 
-			this.add_actor(this._bGraphicalCountdown ?
+			this.add_child(this._bGraphicalCountdown ?
 				this._graphicalTimer : this._textualTimer);
 
 			if (this._idleTimeout) {
@@ -243,9 +243,9 @@ let TeaTime = GObject.registerClass(
 				GLib.source_remove(this._idleTimeout);
 				delete this._idleTimeout;
 			}
-			this.remove_actor(this._bGraphicalCountdown ?
+			this.remove_child(this._bGraphicalCountdown ?
 				this._graphicalTimer : this._textualTimer);
-			this.add_actor(this._logo);
+			this.add_child(this._logo);
 			this._idleTimeout = null;
 			// always remove remembered timer
 			this._settings.set_string(this.config_keys.running_timer, '');
