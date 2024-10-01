@@ -11,6 +11,7 @@
  ********************************************************************/
 
 import Clutter from 'gi://Clutter';
+import Cogl from 'gi://Cogl';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
 
@@ -33,13 +34,9 @@ export var TwoColorIcon = GObject.registerClass(
 			}.bind(this));
 
 			// some fallback color
-			this._primaryColor = new Clutter.Color({
-				red: 150,
-				green: 150,
-				blue: 150,
-				alpha: 255
-			});
-			this._secundaryColor = this._primaryColor;
+			let [res, color] = Cogl.Color.from_string("rgb(150, 150, 150)");
+			this._primaryColor = color;
+			this._secundaryColor = color;
 			this._customStatus = null;
 		}
 

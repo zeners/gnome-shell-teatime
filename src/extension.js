@@ -4,6 +4,7 @@
 */
 
 import Clutter from 'gi://Clutter';
+import Cogl from 'gi://Cogl';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
@@ -176,20 +177,20 @@ let TeaTime = GObject.registerClass(
 				let seconds = 0;
 				let match = customTime.match(/^(?:(\d+):(?=\d+:\d+))?(\d+)(?::(\d{0,2}))?$/) // [h:]m[:s]
 				if (!match) {
-				    match = customTime.match(/^:(\d+)$/) // only seconds
+					match = customTime.match(/^:(\d+)$/) // only seconds
 				}
 				if (!match) { // 1h1m1s format
-				    match = customTime.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/)
+					match = customTime.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/)
 				}
 				if (match) {
 					let factor = 1;
-                    for (var i = match.length - 1; i > 0; i--) {
-                        let s = match[i] === undefined ? "" : match[i].replace(/^0+/, ''); // fix for elder GNOME <= 3.10 which don't like leading zeros
-                        if (s.match(/^\d+$/)) { // only if something left
-                            seconds += factor * parseInt(s);
-                        }
-                        factor *= 60;
-                    }
+					for (var i = match.length - 1; i > 0; i--) {
+						let s = match[i] === undefined ? "" : match[i].replace(/^0+/, ''); // fix for elder GNOME <= 3.10 which don't like leading zeros
+						if (s.match(/^\d+$/)) { // only if something left
+							seconds += factor * parseInt(s);
+						}
+						factor *= 60;
+					}
 					if (seconds > 0) {
 						this._initCountdown(new Date(), seconds);
 						this.menu.close();
@@ -200,7 +201,20 @@ let TeaTime = GObject.registerClass(
 		}
 
 		_showNotification(subject, text) {
-			Main.notify(subject, text, this._extension.dir.get_child('utilities-teatime.svg').get_path());
+			let source = new MessageTray.Source({
+				title: _("TeaTime applet"),
+				iconName: 'utilities-teatime',
+			});
+
+			let notification = new MessageTray.Notification({
+				source: source,
+				title: subject,
+				body: text,
+				isTransient: true,
+			});
+
+			Main.messageTray.add(source);
+			source.addNotification(notification);
 		}
 
 		_initCountdown(startTime, time) {
@@ -307,7 +321,7 @@ let TeaTime = GObject.registerClass(
 			let [bHasPadding, padding] = themeNode.lookup_length("-natural-hpadding", false);
 
 			this._primaryColor = color;
-			this._secondaryColor = new Clutter.Color({
+			this._secondaryColor = new Cogl.Color({
 				red: color.red,
 				green: color.green,
 				blue: color.blue,
