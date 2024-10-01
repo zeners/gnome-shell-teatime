@@ -4,6 +4,7 @@
 */
 
 import Clutter from 'gi://Clutter';
+import Cogl from 'gi://Cogl';
 import GLib from 'gi://GLib';
 import GObject from 'gi://GObject';
 import St from 'gi://St';
@@ -200,16 +201,20 @@ let TeaTime = GObject.registerClass(
 		}
 
 		_showNotification(subject, text) {
-			let source = new MessageTray.Source(_("TeaTime applet"), 'utilities-teatime');
-			Main.messageTray.add(source);
+			let source = new MessageTray.Source({
+				title: _("TeaTime applet"),
+				iconName: 'utilities-teatime',
+			});
 
-			let notification = new MessageTray.Notification(source, subject, text);
-			notification.setTransient(true);
-			if (typeof source.showNotification === 'function') {
-				source.showNotification(notification);
-			} else {
-				source.notify(notification);
-			}
+			let notification = new MessageTray.Notification({
+				source: source,
+				title: subject,
+				body: text,
+				isTransient: true,
+			});
+
+			Main.messageTray.add(source);
+			source.addNotification(notification);
 		}
 
 		_initCountdown(startTime, time) {
@@ -316,7 +321,7 @@ let TeaTime = GObject.registerClass(
 			let [bHasPadding, padding] = themeNode.lookup_length("-natural-hpadding", false);
 
 			this._primaryColor = color;
-			this._secondaryColor = new Clutter.Color({
+			this._secondaryColor = new Cogl.Color({
 				red: color.red,
 				green: color.green,
 				blue: color.blue,
