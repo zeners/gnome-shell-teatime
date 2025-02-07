@@ -44,6 +44,11 @@ A handy zip file can be created using:
 Thanks to  Thomas Liebetraut for the new build system.
 Get the latest version from:  https://github.com/tommie-lie/gnome-shell-extensions-template
 
+**Branches**
+
+* master: for AUR-Package - contains system-symbol used as notification-icon
+* teatimer: for http://extensions.gnome.org - follows extensions guidelines 
+
 **Contribution**
 
 Patches are welcome. But please make sure the code you contribute is formated properly.
