@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-08-24 18:26+0200\n"
+"POT-Creation-Date: 2025-04-06 19:15+0200\n"
 "PO-Revision-Date: 2016-10-04 21:48+0800\n"
 "Last-Translator: 绿色圣光 <lishaohui.qd@163.com>\n"
 "Language-Team: Chinese (Simplified) <>\n"
@@ -18,123 +18,140 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: ../src/extension.js:96
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:90
 msgid "Show settings"
 msgstr "显示设置"
 
-#: ../src/extension.js:106
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:99
 msgid "min:sec"
 msgstr "分:秒"
 
-#: ../src/extension.js:142 ../src/extension.js:258 ../src/extension.js:269
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:136
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:265
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:279
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:282
 msgid "Stop Timer"
 msgstr ""
 
-#: ../src/extension.js:208
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:205
 msgid "TeaTime applet"
 msgstr "泡茶时间小程序"
 
-#: ../src/extension.js:269
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:279
 #, javascript-format
 msgid "%s to go"
 msgstr ""
 
-#: ../src/extension.js:282
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:293
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/utils.js:55
 msgid "Your tea is ready!"
 msgstr "您的茶已经准备好了！"
 
-#: ../src/extension.js:283
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:294
 msgid "Drink it, while it is hot!"
 msgstr "趁热喝吧！"
 
-#: ../src/prefs.js:68
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:36
+msgid "Appearance Options"
+msgstr ""
+
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:56
 msgid "Graphical Countdown"
 msgstr "图形化倒计时"
 
-#: ../src/prefs.js:74
-msgid "Alarm sound"
-msgstr "提示音"
-
-#: ../src/prefs.js:80
-msgid "Remember running Timer"
-msgstr ""
-
-#: ../src/prefs.js:100 ../src/prefs.js:180
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:71
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:114
 msgid "Select alarm sound file"
 msgstr "选择提示声音文件"
 
-#: ../src/prefs.js:126
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:74
+msgid "Alarm sound"
+msgstr "提示音"
+
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:87
+msgid "Remember running Timer"
+msgstr ""
+
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:207
+msgid "Timers"
+msgstr ""
+
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:238
 msgid "Tea"
 msgstr "茶"
 
-#: ../src/prefs.js:146
-msgid "Steep time"
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:242
+msgid "Steep time in seconds"
 msgstr "浸泡时间"
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:5
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:247
+msgid "remove"
+msgstr ""
+
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:5
 msgid ""
 "{ \"Green tea\": 180, \"Black tea\": 210, \"Fruit tea\": 420, \"White tea\": "
 "120 }"
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:6
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:6
 msgid "Tea drawing times list"
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:7
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:7
 msgid "A mapping of a teas to their corresponding drawing time in seconds."
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:11
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:11
 #, fuzzy
 msgid "Show fullscreen notifications."
 msgstr "全屏通知"
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:12
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:12
 msgid ""
 "Displays a more disrupting, modal fullscreen notification when the timer has "
 "elapsed."
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:16
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:16
 #, fuzzy
 msgid "Show an animated graphical countdown."
 msgstr "图形化倒计时"
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:17
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:17
 msgid "Displays a small, yet nice animation instead of an textual countdown."
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:21
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:21
 msgid "Drawing completed sound"
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:22
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:22
 msgid "A sound file played after drawing is completed."
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:26
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:26
 msgid "Play sound when drawing completed"
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:27
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:27
 msgid "Play a sound file after drawing is completed."
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:31
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:31
 msgid "Currently running timer"
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:32
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:32
 msgid ""
 "Start-time and total duration in seconds to restore after plugin shutdown"
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:36
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:36
 msgid "remember running timer after plugin shutdown"
 msgstr ""
 
-#: ../src/schemas/org.gnome.shell.extensions.teatime.gschema.xml:37
+#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:37
 msgid "remember startet timer after screen-lock or reboot"
 msgstr ""
 
