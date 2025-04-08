@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-06 19:15+0200\n"
-"PO-Revision-Date: 2025-03-26 16:52+0300\n"
+"PO-Revision-Date: 2025-04-08 17:50+0300\n"
 "Last-Translator: Fraxinus Acer <>\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -42,7 +42,7 @@ msgstr "Приложение TeaTime"
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:279
 #, javascript-format
 msgid "%s to go"
-msgstr ", осталось %s"
+msgstr "%s осталось"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:293
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/utils.js:55
@@ -55,7 +55,7 @@ msgstr "Пейте его, пока он горячий!"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:36
 msgid "Appearance Options"
-msgstr ""
+msgstr "Параметры внешнего вида"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:56
 msgid "Graphical Countdown"
@@ -75,9 +75,8 @@ msgid "Remember running Timer"
 msgstr "Запоминать запущенные таймеры"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:207
-#, fuzzy
 msgid "Timers"
-msgstr "Остановить таймер"
+msgstr "Таймеры"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:238
 msgid "Tea"
@@ -89,7 +88,7 @@ msgstr "Время заваривания"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:247
 msgid "remove"
-msgstr ""
+msgstr "удалить"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:5
 msgid ""
