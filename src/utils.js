@@ -64,3 +64,40 @@ export function setCairoColorFromClutter(cr, c) {
 export function isType(value, typename) {
 	return typeof value == typename;
 }
+
+export function parseTime(customTime, allowAbsolute = true) {
+    let seconds = 0;
+    let match = customTime.match(/^[@Tt]?(?:(\d+):(?=\d+:\d+))?(\d+)(?::(\d{0,2}))?$/) // [h:]m[:s]
+    let addMissingSeconds = 1; // absolute means h:m rather than relative m:s or
+    if (!match) {
+        match = customTime.match(/^:(\d+)$/) // only seconds
+    }
+    if (!match) { // 1h1m1s format
+        match = customTime.match(/^[@Tt]?(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/)
+    }
+    if (match) {
+        let factor = 1;
+        for (var i = match.length - 1; i > 0; i--) {
+            let isMissing = match[i] === undefined
+            let s = isMissing ? "" : match[i].replace(/^0+/, ''); // fix for elder GNOME <= 3.10 which don't like leading zeros
+            if (s.match(/^\d+$/)) { // only if something left
+                seconds += factor * parseInt(s);
+            } else if(isMissing && factor > 1) {
+                addMissingSeconds *= 60;
+            }
+            factor *= 60;
+        }
+        if (customTime.match(/^[@Tt].*/) && allowAbsolute) {
+            // absolute time
+            seconds *= addMissingSeconds;
+            let now = new Date()
+            let current = ((now.getHours() * 60) + now.getMinutes()) * 60 + now.getSeconds();
+            if (current >= seconds) {
+                seconds = seconds - current + 60 *60 * 24
+            }  else {
+                seconds = seconds - current
+            }
+        }
+    }
+    return seconds;
+}
