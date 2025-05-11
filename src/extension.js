@@ -73,7 +73,19 @@ let TeaTime = GObject.registerClass(
 
 			this._createMenu();
 			this._continueRunningTimer();
+			this._colorChanged = false;
+			this.menu.connect('activate', this._resetMenuItemColor.bind(this));
+
+            let [res, color] = Cogl.Color.from_string("#f00");
+            this._colorRed = color;
 		}
+
+        _resetMenuItemColor(){
+            if (this._colorChanged) {
+                this._colorChanged = false;
+                this._logo.setColor(this._primaryColor, this._secondaryColor);
+            }
+        }
 
 		_createMenu() {
 			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -173,29 +185,11 @@ let TeaTime = GObject.registerClass(
 				event.get_key_symbol() == Clutter.KEY_Return ||
 				event.get_key_symbol() == Clutter.KEY_KP_Enter) {
 
-				let customTime = text.get_text();
-				let seconds = 0;
-				let match = customTime.match(/^(?:(\d+):(?=\d+:\d+))?(\d+)(?::(\d{0,2}))?$/) // [h:]m[:s]
-				if (!match) {
-				    match = customTime.match(/^:(\d+)$/) // only seconds
-				}
-				if (!match) { // 1h1m1s format
-				    match = customTime.match(/^(?:(\d+)h)?(?:(\d+)m)?(?:(\d+)s)?$/)
-				}
-				if (match) {
-					let factor = 1;
-                    for (var i = match.length - 1; i > 0; i--) {
-                        let s = match[i] === undefined ? "" : match[i].replace(/^0+/, ''); // fix for elder GNOME <= 3.10 which don't like leading zeros
-                        if (s.match(/^\d+$/)) { // only if something left
-                            seconds += factor * parseInt(s);
-                        }
-                        factor *= 60;
-                    }
-					if (seconds > 0) {
-						this._initCountdown(new Date(), seconds);
-						this.menu.close();
-					}
-				}
+				let seconds = Utils.parseTime(text.get_text())
+                if (seconds > 0) {
+                    this._initCountdown(new Date(), seconds);
+                    this.menu.close();
+                }
 				this._customEntry.set_text("");
 			}
 		}
@@ -290,6 +284,9 @@ let TeaTime = GObject.registerClass(
 				// count down finished, switch display again
 				this._stopCountdown();
 				this._playSound();
+
+				this._colorChanged = true;
+				this._logo.setColor(this._colorRed, this._colorRed);
 				this._showNotification(_("Your tea is ready!"),
 					_("Drink it, while it is hot!"));
 				return false;

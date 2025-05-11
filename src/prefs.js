@@ -53,7 +53,8 @@ var TeaTimePrefsGroup = GObject.registerClass(
 			this.graphicalCountdownSwitch.connect("notify::active", this._saveGraphicalCountdown.bind(this));
 			const graphicalCountdownRow = new Adw.ActionRow({
 				title: _("Graphical Countdown"),
-				activatable_widget: this.graphicalCountdownSwitch
+				activatable_widget: this.graphicalCountdownSwitch,
+				focusable: false
 			});
 			graphicalCountdownRow.add_suffix(this.graphicalCountdownSwitch)
 
@@ -71,7 +72,8 @@ var TeaTimePrefsGroup = GObject.registerClass(
 			});
 			const alarmSoundRow = new Adw.ActionRow({
 				title: _("Alarm sound"),
-				activatable_widget: this.alarmSoundSwitch
+				activatable_widget: this.alarmSoundSwitch,
+				focusable: false
 			});
 			alarmSoundRow.add_suffix(this.alarmSoundFileButton);
 			alarmSoundRow.add_suffix(this.alarmSoundSwitch);
@@ -84,7 +86,8 @@ var TeaTimePrefsGroup = GObject.registerClass(
 			this.rememberRunningCounterSwitch.connect("notify::active", this._saveRememberRunningCounter.bind(this));
 			const rememberRunningCounterRow = new Adw.ActionRow({
 				title: _("Remember running Timer"),
-				activatable_widget: this.rememberRunningCounterSwitch
+				activatable_widget: this.rememberRunningCounterSwitch,
+				focusable: false
 			});
 			rememberRunningCounterRow.add_suffix(this.rememberRunningCounterSwitch);
 
@@ -201,12 +204,13 @@ var TeaTimePrefsGroup = GObject.registerClass(
 
 var TeaTimeTimersGroup = GObject.registerClass(
 	class TeaTimeTimersGroup extends Adw.PreferencesGroup {
-		_init(settings) {
+		_init(settings, window) {
 			super._init({
 				title: _("Timers")
 			});
 
 			this.config_keys = Utils.GetConfigKeys();
+			this._parentWindow = window;
 
 			this._tealist = new Gtk.ListStore();
 			this._tealist.set_column_types([
@@ -228,13 +232,19 @@ var TeaTimeTimersGroup = GObject.registerClass(
 		}
 
 		_initWindow() {
-			this.addButton = Gtk.Button.new_from_icon_name("list-add-symbolic");
-			this.addButton.connect("clicked", this._addTea.bind(this));
-			this.header_suffix = this.addButton;
+			const addButton = Gtk.Button.new_from_icon_name("list-add-symbolic");
+			addButton.connect("clicked", this._addTea.bind(this));
+			// this.header_suffix = this.addButton;
+
+			this.addButtonRow = new Adw.ActionRow({
+				focusable: false
+			});
+			this.addButtonRow.add_prefix(addButton);
 
 
 			this.teeColumnNamesRow = new Adw.ActionRow({
-				subtitle: _("Tea")
+				subtitle: _("Tea"),
+				focusable: false
 			});
 
 			this.teeColumnNamesRow.add_suffix(new Gtk.Label({
@@ -257,7 +267,8 @@ var TeaTimeTimersGroup = GObject.registerClass(
 				valign: Gtk.Align.CENTER,
 				hexpand: true,
 				halign: Gtk.Align.FILL,
-				text: store.get_value(iter, Columns.TEA_NAME)
+				text: store.get_value(iter, Columns.TEA_NAME),
+				placeholder_text: _("Tea")
 			});
 
 			nameEntry.connect('changed', () => {
@@ -270,10 +281,12 @@ var TeaTimeTimersGroup = GObject.registerClass(
 				adjustment: store.get_value(iter, Columns.ADJUSTMENT),
 				digits: 0,
 				valign: Gtk.Align.CENTER,
+				xalign: 1,
+				width_request: 140
 			});
 			// spinButton.value = store.get_value(iter, Columns.STEEP_TIME);
 			spinButton.connect('value-changed', () => {
-				store.set_value(iter, Columns.STEEP_TIME, spinButton.value)
+				store.set_value(iter, Columns.STEEP_TIME, spinButton.adjustment.value)
 			})
 
 			this.removeButton = Gtk.Button.new_from_icon_name("user-trash-symbolic");
@@ -285,10 +298,13 @@ var TeaTimeTimersGroup = GObject.registerClass(
 			teeItemActionRow.add_suffix(this.removeButton);
 
 			this.add(teeItemActionRow);
+			// move addBottonRow to the bottom
+			this.remove(this.addButtonRow);
+			this.add(this.addButtonRow);
 
 			if (!this._inhibitUpdate) {
-				_save(store, path, iter);
-				nameEntry.grab_focus();
+                nameEntry.grab_focus();
+                this._save(store, path, iter);
 			}
 
 		}
@@ -305,6 +321,7 @@ var TeaTimeTimersGroup = GObject.registerClass(
 			this._inhibitUpdate = true;
 
 			this.add(this.teeColumnNamesRow);
+			this.add(this.addButtonRow);
 
 			this._tealist.clear();
 			for (let teaname in list) {
@@ -317,7 +334,9 @@ var TeaTimeTimersGroup = GObject.registerClass(
 					value: time
 				});
 				let item = this._tealist.append();
-				this._tealist.set(item, [Columns.TEA_NAME, Columns.STEEP_TIME, Columns.ADJUSTMENT, Columns.ROW], [teaname, time, adj, new Adw.ActionRow()]);
+				this._tealist.set(item, [Columns.TEA_NAME, Columns.STEEP_TIME, Columns.ADJUSTMENT, Columns.ROW], [_(teaname), time, adj, new Adw.ActionRow({
+					focusable: false
+				})]);
 				this._addTeaEntry(this._tealist, "", item);
 			}
 
@@ -329,10 +348,12 @@ var TeaTimeTimersGroup = GObject.registerClass(
 				lower: 1,
 				step_increment: 1,
 				upper: 65535,
-				value: 1
+				value: 60
 			});
 			const iter = this._tealist.append();
-			this._tealist.set(iter, [Columns.TEA_NAME, Columns.STEEP_TIME, Columns.ADJUSTMENT, Columns.ROW], ["", 1, adj, new Adw.ActionRow()]);
+			this._tealist.set(iter, [Columns.TEA_NAME, Columns.STEEP_TIME, Columns.ADJUSTMENT, Columns.ROW], ["", 300, adj, new Adw.ActionRow({
+				focusable: false
+			})]);
 			this._addTeaEntry(this._tealist, "", iter);
 		}
 
@@ -372,11 +393,12 @@ export default class TeaTimePreferences extends ExtensionPreferences {
 		const page = new Adw.PreferencesPage();
 
 		const appearanceGroup = new TeaTimePrefsGroup(settings, window);
-		const timersGroup = new TeaTimeTimersGroup(settings);
+		const timersGroup = new TeaTimeTimersGroup(settings, window);
 
 		page.add(appearanceGroup);
 		page.add(timersGroup);
 
 		window.add(page);
+		page.scroll_to_focus = true;
 	}
 }
