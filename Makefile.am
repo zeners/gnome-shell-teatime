@@ -1,5 +1,6 @@
 additional_files = 
 
+ACLOCAL_AMFLAGS = -I /usr/share/gettext/m4
 
 uuid = @PACKAGE_NAME@
 

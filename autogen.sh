@@ -2,8 +2,6 @@
 srcdir=`dirname $0`
 [ -z "$srcdir" ] && srcdir=.
 
-PKG_NAME=mypackage
-
 if [ ! -f "$srcdir/configure.ac" ]; then
     echo "$srcdir doesn't look like source directory for $PKG_NAME" >&2
     exit 1
