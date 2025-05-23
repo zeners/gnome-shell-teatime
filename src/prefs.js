@@ -263,6 +263,7 @@ var TeaTimeTimersGroup = GObject.registerClass(
 		}
 
 		_addTeaEntry(store, path, iter) {
+			let lastInput = ""; // remember last input value to restore from reset on output
 			const teeItemActionRow = store.get_value(iter, Columns.ROW);
 			const nameEntry = new Gtk.Entry({
 				valign: Gtk.Align.CENTER,
@@ -285,10 +286,34 @@ var TeaTimeTimersGroup = GObject.registerClass(
 				xalign: 1,
 				width_request: 140
 			});
-			// spinButton.value = store.get_value(iter, Columns.STEEP_TIME);
-			spinButton.connect('value-changed', () => {
-				store.set_value(iter, Columns.STEEP_TIME, spinButton.adjustment.value)
-			})
+			spinButton.value = store.get_value(iter, Columns.STEEP_TIME);
+
+			spinButton.connect('input', newValue => {
+				let oldValue = spinButton.adjustment.value
+				let src = spinButton.text;
+				let newVal = Utils.parseTime(spinButton.text, false);
+				store.set_value(iter, Columns.STEEP_TIME, newVal)
+				newValue = newVal * 1.0;
+				let newTime = Utils.formatTime(newVal);
+				spinButton.text = newTime;
+				lastInput = newTime;
+				return true;
+			});
+
+			spinButton.connect('output', () => {
+				let old = spinButton.text;
+				let src = spinButton.adjustment.value;
+				// lost focus and mouse-up on Spin reset value to 1 -> ignore this update!
+				if (lastInput == old && src == 1) {
+					src = Utils.parseTime(lastInput);
+					spinButton.adjustment.value = src;
+				}
+				let result = Utils.formatTime(src);
+				spinButton.text = result;
+				store.set_value(iter, Columns.STEEP_TIME, src)
+				lastInput = "";
+				return true;
+			});
 
 			this.removeButton = Gtk.Button.new_from_icon_name("user-trash-symbolic");
 			this.removeButton.valign = Gtk.Align.CENTER;
@@ -304,8 +329,8 @@ var TeaTimeTimersGroup = GObject.registerClass(
 			this.add(this.addButtonRow);
 
 			if (!this._inhibitUpdate) {
-                nameEntry.grab_focus();
-                this._save(store, path, iter);
+				nameEntry.grab_focus();
+				this._save(store, path, iter);
 			}
 
 		}
