@@ -76,16 +76,16 @@ let TeaTime = GObject.registerClass(
 			this._colorChanged = false;
 			this.menu.connect('activate', this._resetMenuItemColor.bind(this));
 
-            let [res, color] = Cogl.Color.from_string("#f00");
-            this._colorRed = color;
+			let [res, color] = Cogl.Color.from_string("#f00");
+			this._colorRed = color;
 		}
 
-        _resetMenuItemColor(){
-            if (this._colorChanged) {
-                this._colorChanged = false;
-                this._logo.setColor(this._primaryColor, this._secondaryColor);
-            }
-        }
+		_resetMenuItemColor() {
+			if (this._colorChanged) {
+				this._colorChanged = false;
+				this._logo.setColor(this._primaryColor, this._secondaryColor);
+			}
+		}
 
 		_createMenu() {
 			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -186,10 +186,10 @@ let TeaTime = GObject.registerClass(
 				event.get_key_symbol() == Clutter.KEY_KP_Enter) {
 
 				let seconds = Utils.parseTime(text.get_text())
-                if (seconds > 0) {
-                    this._initCountdown(new Date(), seconds);
-                    this.menu.close();
-                }
+				if (seconds > 0) {
+					this._initCountdown(new Date(), seconds);
+					this.menu.close();
+				}
 				this._customEntry.set_text("");
 			}
 		}
