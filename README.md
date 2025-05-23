@@ -38,11 +38,18 @@ If you wish to translate TeaTime to your language, have a look at the directory 
 
 A handy zip file can be created using:
 
-    make zip   # This is the same you get via http://extensions.gnome.org
-
+* via build-system 
+  ```shell
+  make zip
+  ```
+* or via gnome-extensions tools (this is the same you get via http://extensions.gnome.org)
+  ```shell
+  gnome-extensions pack --podir=../po --schema=schemas/org.gnome.shell.extensions.teatimer.gschema.xml --extra-source=icon.js --extra-source=utils.js --extra-source=utilities-teatime.svg --force src
+  ```
 
 Thanks to  Thomas Liebetraut for the new build system.
 Get the latest version from:  https://github.com/tommie-lie/gnome-shell-extensions-template
+
 
 **Branches**
 
