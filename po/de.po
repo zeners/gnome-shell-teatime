@@ -32,7 +32,7 @@ msgstr "min:sec"
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:279
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:282
 msgid "Stop Timer"
-msgstr ""
+msgstr "Abbrechen"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:205
 msgid "TeaTime applet"
@@ -71,7 +71,7 @@ msgstr "Benachrichtigungsklang"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:87
 msgid "Remember running Timer"
-msgstr ""
+msgstr "laufende Zeit speichern"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:207
 msgid "Timers"
@@ -87,7 +87,7 @@ msgstr "Ziehzeit in Sekunden"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:247
 msgid "remove"
-msgstr ""
+msgstr "entfernen"
 
 #: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:5
 msgid ""
