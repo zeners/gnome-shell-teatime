@@ -47,7 +47,7 @@ A handy zip file can be created using:
   ```
 * or via gnome-extensions tools (this is the same you get via http://extensions.gnome.org)
   ```shell
-  ./autogen.sh && ./configure --prefix=/usr && make && gnome-extensions pack --podir=../po --schema=schemas/org.gnome.shell.extensions.teatimer.gschema.xml --extra-source=icon.js --extra-source=utils.js --extra-source=utilities-teatime.svg --force src
+  ./autogen.sh && ./configure --prefix=/usr && make && gnome-extensions pack --podir=../po --schema=schemas/org.gnome.shell.extensions.teatimer.gschema.xml --extra-source=icon.js --extra-source=utils.js --extra-source=../utilities-teatime.svg --force src
   ```
 
 Thanks to  Thomas Liebetraut for the new build system.
