@@ -74,7 +74,7 @@ let TeaTime = GObject.registerClass(
 			this._createMenu();
 			this._continueRunningTimer();
 			this._colorChanged = false;
-			this.menu.connect('activate', this._resetMenuItemColor.bind(this));
+			this._menu_activate_id = this.menu.connect('activate', this._resetMenuItemColor.bind(this));
 
 			let [res, color] = Cogl.Color.from_string("#f00");
 			this._colorRed = color;
@@ -89,9 +89,9 @@ let TeaTime = GObject.registerClass(
 
 		_createMenu() {
 			this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-			this._settings.connect("changed::" + this.config_keys.steep_times,
+			this._setting_changed_id = this._settings.connect("changed::" + this.config_keys.steep_times,
 				this._updateTeaList.bind(this));
-			this._settings.connect("changed::" + this.config_keys.graphical_countdown,
+			this._settings_change2_id = this._settings.connect("changed::" + this.config_keys.graphical_countdown,
 				this._updateCountdownType.bind(this));
 
 			this.teaItemCont = new PopupMenu.PopupMenuSection();
@@ -232,10 +232,7 @@ let TeaTime = GObject.registerClass(
 			this.add_child(this._bGraphicalCountdown ?
 				this._graphicalTimer : this._textualTimer);
 
-			if (this._idleTimeout) {
-				GLib.source_remove(this._idleTimeout);
-				delete this._idleTimeout;
-			}
+			this._removeIdleTimeout();
 			this._idleTimeout = GLib.timeout_add(GLib.PRIORITY_DEFAULT, 250,
 				this._doCountdown.bind(this));
 
@@ -245,15 +242,19 @@ let TeaTime = GObject.registerClass(
 			}
 		}
 
-		_stopCountdown() {
+		_removeIdleTimeout() {
 			if (this._idleTimeout) {
 				GLib.source_remove(this._idleTimeout);
 				delete this._idleTimeout;
+				this._idleTimeout = null;
 			}
+		}
+
+		_stopCountdown() {
+			this._removeIdleTimeout();
 			this.remove_child(this._bGraphicalCountdown ?
 				this._graphicalTimer : this._textualTimer);
 			this.add_child(this._logo);
-			this._idleTimeout = null;
 			// always remove remembered timer
 			this._settings.set_string(this.config_keys.running_timer, '');
 			this.stopMenu.text = _("Stop Timer");
@@ -337,6 +338,13 @@ let TeaTime = GObject.registerClass(
 			this._logo.setScaling(scaling);
 			this._graphicalTimer.setScaling(scaling);
 		}
+		destroy() {
+			this._removeIdleTimeout(); // only for shexli
+			this._settings.disconnect(this._setting_changed_id);
+			this._settings.disconnect(this._settings_change2_id);
+			this._menu.disconnect(this._menu_activate_id);
+			super.destroy();
+		}
 	});
 
 export default class TeaTimeExtension extends Extension {
@@ -349,5 +357,6 @@ export default class TeaTimeExtension extends Extension {
 		this._TeaTime._stopCountdown();
 		this._TeaTime.destroy();
 		delete this._TeaTime;
+		this._TeaTime = null;
 	}
 }
