@@ -268,7 +268,7 @@ let TeaTime = GObject.registerClass(
 				this.stopMenu.text = _("Stop Timer") + ': ' + _('%s to go').replace('%s', Utils.formatTime(remainingTime));
 			} else {
 				this._textualTimer.text = Utils.formatTime(remainingTime);
-				this.stopMenu.text = _("Stop Timer");
+				this.stopMenu.text = _("Stop Timer") + ': ' + _('will end at %s').replace('%s', this._stopTime.toLocaleTimeString());
 			}
 		}
 

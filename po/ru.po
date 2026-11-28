@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-06 19:15+0200\n"
+"POT-Creation-Date: 2026-11-28 14:51+0100\n"
 "PO-Revision-Date: 2025-04-08 17:50+0300\n"
 "Last-Translator: Fraxinus Acer <>\n"
 "Language-Team: Russian\n"
@@ -20,77 +20,79 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Gtranslator 48.0\n"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:90
+#: ../src/extension.js:102
 msgid "Show settings"
 msgstr "Настройки"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:99
+#: ../src/extension.js:111
 msgid "min:sec"
 msgstr "мин:сек"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:136
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:265
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:279
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:282
+#: ../src/extension.js:148 ../src/extension.js:255 ../src/extension.js:269
+#: ../src/extension.js:272
 msgid "Stop Timer"
 msgstr "Остановить таймер"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:205
+#: ../src/extension.js:194
 msgid "TeaTime applet"
 msgstr "Приложение TeaTime"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:279
+#: ../src/extension.js:269
 #, javascript-format
 msgid "%s to go"
 msgstr "%s осталось"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:293
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/utils.js:55
+#: ../src/extension.js:272
+#, javascript-format
+msgid "will end at %s"
+msgstr ""
+
+#: ../src/extension.js:286
 msgid "Your tea is ready!"
 msgstr "Ваш чай готов!"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/extension.js:294
+#: ../src/extension.js:287
 msgid "Drink it, while it is hot!"
 msgstr "Пейте его, пока он горячий!"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:36
+#: ../src/prefs.js:35
 msgid "Appearance Options"
 msgstr "Параметры внешнего вида"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:56
+#: ../src/prefs.js:55
 msgid "Graphical Countdown"
 msgstr "Визуальный обратный отсчёт"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:71
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:114
+#: ../src/prefs.js:71 ../src/prefs.js:116
 msgid "Select alarm sound file"
 msgstr "Выбрать файл для звукового сигнала "
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:74
+#: ../src/prefs.js:74
 msgid "Alarm sound"
 msgstr "Звук сигнала"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:87
+#: ../src/prefs.js:88
 msgid "Remember running Timer"
 msgstr "Запоминать запущенные таймеры"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:207
+#: ../src/prefs.js:209
+#, fuzzy
 msgid "Timers"
 msgstr "Таймеры"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:238
+#: ../src/prefs.js:246 ../src/prefs.js:272
 msgid "Tea"
 msgstr "Чай"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:242
+#: ../src/prefs.js:251
 msgid "Steep time in seconds"
 msgstr "Время заваривания"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/prefs.js:247
+#: ../src/prefs.js:256
 msgid "remove"
 msgstr "удалить"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:5
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:5
 msgid ""
 "{ \"Green tea\": 180, \"Black tea\": 210, \"Fruit tea\": 420, \"White tea\": "
 "120 }"
@@ -98,19 +100,19 @@ msgstr ""
 "{ \"Зелёный чай\": 180, \"Чёрный чай\": 210, \"Фруктовый чай\": 420, \"Белый "
 "чай\": 120 }"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:6
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:6
 msgid "Tea drawing times list"
 msgstr "Список таймеров заваривания чая"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:7
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:7
 msgid "A mapping of a teas to their corresponding drawing time in seconds."
 msgstr "Отображать время заваривания чая в секундах."
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:11
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:11
 msgid "Show fullscreen notifications."
 msgstr "Показать полноэранные уведомления"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:12
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:12
 msgid ""
 "Displays a more disrupting, modal fullscreen notification when the timer has "
 "elapsed."
@@ -118,47 +120,47 @@ msgstr ""
 "Отображает более заметное полноэкранное уведомление в режиме прилипания по "
 "истечении таймера."
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:16
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:16
 msgid "Show an animated graphical countdown."
 msgstr "Отображать анимированный визуальный обратный отсчёт"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:17
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:17
 msgid "Displays a small, yet nice animation instead of an textual countdown."
 msgstr ""
 "Отображает небольшую, но приятную анимацию вместо текстового обратного "
 "отсчета."
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:21
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:21
 msgid "Drawing completed sound"
 msgstr "Звук полного заваривания"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:22
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:22
 msgid "A sound file played after drawing is completed."
 msgstr "Звуковой файл воспроизводится после завершения заваривания."
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:26
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:26
 msgid "Play sound when drawing completed"
 msgstr "Воспроизводить звук, когда заваривание завершено"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:27
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:27
 msgid "Play a sound file after drawing is completed."
 msgstr "Воспроизводить звуковой файл после завершения рисования."
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:31
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:31
 msgid "Currently running timer"
 msgstr "Текущий запущенный таймер"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:32
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:32
 msgid ""
 "Start-time and total duration in seconds to restore after plugin shutdown"
 msgstr ""
 "Время запуска и общая продолжительность восстановленная после завершения "
 "работы плагина, в секундах"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:36
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:36
 msgid "remember running timer after plugin shutdown"
 msgstr "запоминать запущенный таймер после завершения работы плагина"
 
-#: /drives/NVME/ziller/home/Projekte/gnome-shell-teatime/po/../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:37
+#: ../src/schemas/org.gnome.shell.extensions.teatimer.gschema.xml:37
 msgid "remember startet timer after screen-lock or reboot"
 msgstr "запоминать запущенный таймер после блокировки экрана или перезагрузки"
