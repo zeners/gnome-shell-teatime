@@ -111,7 +111,7 @@ let TeaTime = GObject.registerClass(
 				hint_text: _("min:sec")
 			});
 			this._customEntry.get_clutter_text().set_max_length(10);
-			this._customEntry.get_clutter_text().connect("key-press-event", this._createCustomTimer.bind(this));
+			this._customEntry.get_clutter_text().connect("activate", this._createCustomTimer.bind(this));
 			bottom.box.add_child(this._customEntry);
 			bottom.actor.set_style("padding: 0px 18px;")
 
@@ -180,18 +180,12 @@ let TeaTime = GObject.registerClass(
 			} // value changed
 		}
 
-		_createCustomTimer(text, event) {
-			if (event.get_key_symbol() == Clutter.KEY_Enter ||
-				event.get_key_symbol() == Clutter.KEY_Return ||
-				event.get_key_symbol() == Clutter.KEY_KP_Enter) {
-
-				let seconds = Utils.parseTime(text.get_text())
+		_createCustomTimer(text) {
+			let seconds = Utils.parseTime(text.get_text())
 				if (seconds > 0) {
 					this._initCountdown(new Date(), seconds);
 					this.menu.close();
-				}
-				this._customEntry.set_text("");
-			}
+			this._customEntry.set_text("");
 		}
 
 		_showNotification(subject, text) {
